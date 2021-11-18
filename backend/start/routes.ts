@@ -26,3 +26,4 @@ Route.get('/', async () => {
 
 Route.post("/register", "AuthController.register")
 Route.post("/login", "AuthController.login")
+Route.get("/indicacoes", "IndicacoesController.index")
