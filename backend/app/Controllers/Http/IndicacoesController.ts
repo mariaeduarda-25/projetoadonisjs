@@ -14,9 +14,36 @@ export default class IndicacoesController {
     return indicBD
   }
 
-  public async show({}: HttpContextContract) {}
+  public async show({params, response}: HttpContextContract) {
+    try {
+      const indicBD = await Indicacoe.findOrFail(params.id)
+      return indicBD 
+    } catch (error) {
+      response.status(400).send("Indicação não encontrada!")
+    }
+  }
 
-  public async update({}: HttpContextContract) {}
+  public async update({request, params, response}: HttpContextContract) {
+    try {
+      const indicBD = await Indicacoe.findOrFail(params.id)
+      const {locais} = await request.validate(StoreIndicacoeValidator)
+      //const indicBD = await Indicacoe.create({...data, userId: auth.user?.id})
+      indicBD.locais = locais 
+      await indicBD.save()
+      return indicBD
 
-  public async destroy({}: HttpContextContract) {}
+    } catch (error) {
+      response.status(400).send("Indicação não encontrada!")
+    }
+  }
+
+  public async destroy({params, response}: HttpContextContract) {
+    try {
+      const indicBD = await Indicacoe.findOrFail(params.id)
+      await indicBD.delete()
+      return  indicBD
+    } catch (error) {
+      response.status(400).send("Indicação não encontrada!")
+    }
+  }
 }

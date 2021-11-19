@@ -27,6 +27,7 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.post("/register", "AuthController.register")
 Route.post("/login", "AuthController.login")
 Route.get("/indicacoes", "IndicacoesController.index")
+Route.get("/indicacoes/:id", "IndicacoesController.show")
 Route.group(() => {
-  Route.resource("indicacoes", 'IndicacoesController').apiOnly().except(['index'])
+  Route.resource("indicacoes", 'IndicacoesController').apiOnly().except(['index', 'show'])
 }).middleware('auth')

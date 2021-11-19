@@ -24,7 +24,7 @@ export default class StoreIndicacoeValidator {
    *    ```
    */
   public schema = schema.create({
-    local: schema.string()
+    locais: schema.string()
   })
 
   /**
