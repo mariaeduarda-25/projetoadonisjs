@@ -8,9 +8,10 @@ export default class IndicacoesController {
     return indicBD
   }
 
-  public async store({request}: HttpContextContract) {
+  public async store({request, auth}: HttpContextContract) {
     const data = await request.validate(StoreIndicacoeValidator)
-    const indicBD = await Indicacoe.create({...data, userId:})
+    const indicBD = await Indicacoe.create({...data, userId: auth.user?.id})
+    return indicBD
   }
 
   public async show({}: HttpContextContract) {}
